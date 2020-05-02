@@ -1,9 +1,8 @@
-library(CSCI)
-example(CSCI)
 library(tidyverse)
+#Only covers core results for now
+#Many fields require manual filling. These are left as blank ("") for manual entry in Excel.
 
-
-Swampify_CSCI<-function(x){
+swampify_CSCI<-function(x){
   core<-x$core %>%
     select(StationCode,
            SampleID,
@@ -29,18 +28,18 @@ Swampify_CSCI<-function(x){
                  values_to = "Result") %>%
     mutate(AnalyteName = case_when(AnalyteName=="CSCI_Percentile"~"CSCI_Percentile",
                                    T~paste0("CSCI_", AnalyteName)),
-           SampleDate=NA,
-           ProjectCode=NA,
+           SampleDate="",
+           ProjectCode="",
            EventCode="BA",
-           ProtocolCode=NA, #Or always "SWAMP_2016_WS"?
-           AgencyCode=NA,
-           SampleComments=NA,
+           ProtocolCode="", #Or always "SWAMP_2016_WS"?
+           AgencyCode="",
+           SampleComments="",
            LocationCode="X",
            GeometryShape="Point",
-           CollectionTime=NA,
-           CollectionMethodCode=NA,
-           Replicate=NA,
-           HabitatCollectionComments=NA,
+           CollectionTime="",
+           CollectionMethodCode="",
+           Replicate="",
+           HabitatCollectionComments="",
            MatrixName="benthic",
            MethodName=paste0("CSCI_software_v",packageVersion("CSCI")),
            FractionName="None",
@@ -51,7 +50,7 @@ Swampify_CSCI<-function(x){
            ComplianceCode="Pend",
            BatchVerificationCode="NR",
            CollectionDeviceName="D-Frame Kick Net", #Or do we want to leave blank?
-           HabitatResultComments=NA
+           HabitatResultComments=""
            
     ) %>%
     select(StationCode, SampleID, SampleDate, 
@@ -65,4 +64,10 @@ Swampify_CSCI<-function(x){
   
 }
 
+###EXAMPLE
+#generate CSCI results
+library(CSCI)
+example(CSCI)
+
+results_swampified<-swampify_CSCI(results)
 
