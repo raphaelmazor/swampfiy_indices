@@ -72,11 +72,8 @@ swampify_IPI<-function(res, inp=NULL){
 }
 
 ###EXAMPLE
-#generate CSCI results
+#generate IPI results
 library(PHAB)
 example(IPI)
 results<-IPI(stations, phab)
-head(phab)
-
-
 results_swampified<-  swampify_IPI(results) 

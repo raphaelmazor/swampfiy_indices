@@ -68,7 +68,7 @@ swampify_ASCI<-function(x){
 }
 
 ###EXAMPLE
-#generate CSCI results
+#generate ASCI results
 library(ASCI)
 example(ASCI)
 results<-ASCI(tmp, demo_station)
