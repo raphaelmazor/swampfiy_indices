@@ -3,7 +3,7 @@ library(tidyverse)
 #Many fields require manual filling. These are left as blank ("") for manual entry in Excel.
 swampify_ASCI<-function(x){
   #Core, Suppl1_mmi, and Suppl1_grps
-  xdf<-results %>%
+  xdf<-x %>%
     
     select(-SampleType, -UnrecognizedTaxa) %>%
     # names() %>%dput()
