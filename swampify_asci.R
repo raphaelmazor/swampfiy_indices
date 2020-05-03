@@ -45,7 +45,7 @@ swampify_ASCI<-function(x){
            Replicate=Replicate,
            HabitatCollectionComments="",
            MatrixName="benthic",
-           MethodName=paste0("CSCI_software_v",packageVersion("CSCI")),
+           MethodName=paste0("ASCI_software_v",packageVersion("CSCI")),
            FractionName="None",
            UnitName="none",
            VariableResult="",
@@ -53,7 +53,7 @@ swampify_ASCI<-function(x){
            QACode="None",
            ComplianceCode="Pend",
            BatchVerificationCode="NR",
-           CollectionDeviceName="D-Frame Kick Net", #Or do we want to leave blank?
+           CollectionDeviceName="", 
            HabitatResultComments=Comments,
            
     ) %>%
