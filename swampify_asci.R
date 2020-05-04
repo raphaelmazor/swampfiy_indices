@@ -63,9 +63,28 @@ swampify_ASCI<-function(x){
            Replicate, HabitatCollectionComments, MatrixName, MethodName, AnalyteName,
            FractionName, UnitName, VariableResult, Result, ResQualCode, 
            QACode, ComplianceCode, BatchVerificationCode, CollectionDeviceName, 
-           HabitatResultComments)
+           HabitatResultComments) %>%
+  mutate(UnitName = case_when(AnalyteName %in% c("ASCI_D_pct_att_prp_spp_BCG12","ASCI_D_pct_att_prp_spp_OxRq_DO100_75","ASCI_D_pct_att_prp_spp_Salinity_BF",
+                                                 "ASCI_D_pct_att_prp_spp_Trophic_E","ASCI_D_prp_spp_BCG12_mod","ASCI_D_prp_spp_BCG12_pred",
+                                                 "ASCI_D_prp_spp_OxRq_DO100_75_raw","ASCI_D_prp_spp_Salinity_BF_mod","ASCI_D_prp_spp_Salinity_BF_pred",
+                                                 "ASCI_D_prp_spp_Trophic_E_mod","ASCI_D_prp_spp_Trophic_E_pred","ASCI_H_pct_att_prp_spp_BCG4",
+                                                 "ASCI_H_pct_att_prp_spp_IC_DOC_high","ASCI_H_prp_spp_BCG4_mod","ASCI_H_prp_spp_BCG4_pred",
+                                                 "ASCI_H_prp_spp_IC_DOC_high_raw","ASCI_S_pct_att_cnt_spp_IC_DOC_high","ASCI_S_pct_att_prp_spp_BCG45",
+                                                 "ASCI_S_pct_att_prp_spp_Green","ASCI_S_prp_spp_BCG45_raw","ASCI_S_prp_spp_Green_raw")~"%",
+                              AnalyteName %in% c("ASCI_H_OxRd_DO_30_richness_mod","ASCI_H_OxRd_DO_30_richness_pred","ASCI_H_pct_att_OxRd_DO_30_richness",
+                                                 "ASCI_H_pct_att_Salinity_BF_richness","ASCI_H_Salinity_BF_richness_mod","ASCI_H_Salinity_BF_richness_pred",
+                                                 "ASCI_S_cnt_spp_IC_DOC_high_raw","ASCI_D_ValveCount","ASCI_S_EntityCount",
+                                                 "ASCI_D_NumberTaxa","ASCI_S_NumberTaxa","ASCI_H_NumberTaxa")~"count",
+                              AnalyteName %in% c("ASCI_S_Biovolume")~"mg/m2",
+                              AnalyteName %in% c("ASCI_D","ASCI_S","ASCI_H",
+                                                 "ASCI_D_prp_spp_BCG12_mod_scr","ASCI_D_prp_spp_OxRq_DO100_75_raw_scr","ASCI_D_prp_spp_Salinity_BF_mod_scr",
+                                                 "ASCI_D_prp_spp_Trophic_E_mod_scr","ASCI_H_OxRd_DO_30_richness_mod_scr","ASCI_H_prp_spp_BCG4_mod_scr",
+                                                 "ASCI_H_prp_spp_IC_DOC_high_raw_scr","ASCI_H_Salinity_BF_richness_mod_scr","ASCI_S_cnt_spp_IC_DOC_high_raw_scr",
+                                                 "ASCI_S_prp_spp_BCG45_raw_scr","ASCI_S_prp_spp_Green_raw_scr")~"score",
+                              
+                              T~"error"))
   xdf
-}
+  }
 
 ###EXAMPLE
 #generate ASCI results

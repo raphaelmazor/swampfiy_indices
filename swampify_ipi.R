@@ -48,7 +48,7 @@ swampify_IPI<-function(res, inp=NULL){
            CollectionMethodCode="",
            Replicate="",
            HabitatCollectionComments="",
-           MatrixName="benthic", #DOES THIS MAKE SENSE?
+           MatrixName="habitat", #DOES THIS MAKE SENSE?
            MethodName=paste0("PHAB_software_v",packageVersion("CSCI")),
            FractionName="None",
            UnitName="none",
@@ -67,7 +67,14 @@ swampify_IPI<-function(res, inp=NULL){
            Replicate, HabitatCollectionComments, MatrixName, MethodName, AnalyteName,
            FractionName, UnitName, VariableResult, Result, ResQualCode, 
            QACode, ComplianceCode, BatchVerificationCode, CollectionDeviceName, 
-           HabitatResultComments)
+           HabitatResultComments) %>%
+    mutate(UnitName = case_when(AnalyteName %in% c("PCT_SAFN","PCT_RC","IPI_PCT_SAFN_pred","XCMG","XSLOPE","XCDENMID","IPI_XCMG_pred",
+                                                "PCT_FAST","PCT_SLOW","PCT_POOL","PCT_DR")~"%",
+                                AnalyteName %in% c("IPI_IPI_qa","IPI_Ev_FlowHab_qa","IPI_H_AqHab_qa","IPI_H_SubNat_qa","IPI_PCT_SAFN_qa","IPI_XCMG_qa")~"count",
+                                AnalyteName %in% c("X_BKFW")~"m",
+                                AnalyteName %in% c("IPI","IPI_Ev_FlowHab_score","IPI_H_AqHab_score","IPI_H_SubNat_score","IPI_PCT_SAFN_score","IPI_XCMG_score")~"score",
+                                AnalyteName %in% c("Ev_FlowHab","H_AqHab","IPI_H_AqHab_pred","H_SubNat","XCMGW","XFC_NAT_SWAMP","W1_HALL_SWAMP")~"none",
+                                T~"error"))
   xdf
 }
 
@@ -76,4 +83,10 @@ swampify_IPI<-function(res, inp=NULL){
 library(PHAB)
 example(IPI)
 results<-IPI(stations, phab)
+
+#If you only have the results
 results_swampified<-  swampify_IPI(results) 
+
+#If you also have the inputs
+results_swampified<-  swampify_IPI(res=results, inp=phab) 
+

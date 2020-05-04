@@ -25,6 +25,7 @@ swampify_CSCI<-function(x){
     names_to = "AnalyteName",
     values_to = "Result") %>%
     mutate(AnalyteName = case_when(AnalyteName=="CSCI_Percentile"~"CSCI_Percentile", #The only variable that doesn't follow this naming convention
+                                   AnalyteName=="CSCI"~"CSCI", #The only variable that doesn't follow this naming convention
                                    T~paste0("CSCI_", AnalyteName)))
   #Do Suppl1_OE separately because it's already in long format and because it requires different analyte renaming.
   just_oe<-x$Suppl1_OE %>%
@@ -63,7 +64,21 @@ swampify_CSCI<-function(x){
            Replicate, HabitatCollectionComments, MatrixName, MethodName, AnalyteName,
            FractionName, UnitName, VariableResult, Result, ResQualCode, 
            QACode, ComplianceCode, BatchVerificationCode, CollectionDeviceName, 
-           HabitatResultComments)
+           HabitatResultComments)%>%
+    mutate(UnitName = case_when(AnalyteName %in% c("CSCI_Pcnt_Ambiguous_Individuals","CSCI_Pcnt_Ambiguous_Taxa","CSCI_Clinger_PercentTaxa",
+                                                   "CSCI_Clinger_PercentTaxa_predicted","CSCI_Coleoptera_PercentTaxa","CSCI_Coleoptera_PercentTaxa_predicted",
+                                                   "CSCI_EPT_PercentTaxa","CSCI_EPT_PercentTaxa_predicted","CSCI_Intolerant_Percent",
+                                                   "CSCI_Intolerant_Percent_predicted")~"%",
+                                AnalyteName %in% c("CSCI_Count","CSCI_Number_of_MMI_Iterations","CSCI_Number_of_OE_Iterations",
+                                                   "CSCI_Taxonomic_Richness","CSCI_Taxonomic_Richness_predicted",
+                                                   "CSCI_Shredder_Taxa","CSCI_Shredder_Taxa_predicted","CSCI_Mean_O")~"count",
+                                AnalyteName %in% c("CSCI_OoverE","CSCI_MMI","CSCI",
+                                                   "CSCI_Clinger_PercentTaxa_score","CSCI_Coleoptera_PercentTaxa_score","CSCI_Taxonomic_Richness_score",
+                                                   "CSCI_EPT_PercentTaxa_score","CSCI_Shredder_Taxa_score","CSCI_Intolerant_Percent_score")~"score",
+                                AnalyteName %in% c("CSCI_Percentile","CSCI_E")~"none",
+                                grepl("CSCI_Pc_",AnalyteName)~"none",
+                                grepl("CSCI_pGroup",AnalyteName)~"none",
+                                T~"error"))
   xdf
 }
 
