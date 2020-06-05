@@ -45,7 +45,7 @@ swampify_ASCI<-function(x){
            Replicate=Replicate,
            HabitatCollectionComments="",
            MatrixName="benthic",
-           MethodName=paste0("ASCI_software_v",packageVersion("CSCI")),
+           MethodName=paste0("ASCI_software_v",packageVersion("ASCI")),
            FractionName="None",
            UnitName="none",
            VariableResult="",

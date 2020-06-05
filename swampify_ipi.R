@@ -1,6 +1,5 @@
 library(tidyverse)
 
-results
 
 #Many fields require manual filling. These are left as blank ("") for manual entry in Excel.
 swampify_IPI<-function(res, inp=NULL){
@@ -49,7 +48,7 @@ swampify_IPI<-function(res, inp=NULL){
            Replicate="",
            HabitatCollectionComments="",
            MatrixName="habitat", #DOES THIS MAKE SENSE?
-           MethodName=paste0("PHAB_software_v",packageVersion("CSCI")),
+           MethodName=paste0("PHAB_software_v",packageVersion("PHAB")),
            FractionName="None",
            UnitName="none",
            VariableResult="",
