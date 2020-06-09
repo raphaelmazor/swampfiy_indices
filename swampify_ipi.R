@@ -48,7 +48,16 @@ swampify_IPI<-function(res, inp=NULL){
            Replicate="",
            HabitatCollectionComments="",
            MatrixName="habitat", #DOES THIS MAKE SENSE?
-           MethodName=paste0("PHAB_software_v",packageVersion("PHAB")),
+           MethodName=
+             case_when(AnalyteName %in% c("Ev_FlowHab","H_AqHab",
+                                          "H_SubNat","PCT_SAFN",
+                                          "PCT_RC","XCMG",
+                                          "XSLOPE","X_BKFW",
+                                          "XCMGW","XFC_NAT_SWAMP",
+                                          "XCDENMID","PCT_FAST",
+                                          "PCT_SLOW","PCT_POOL",
+                                          "PCT_DR","W1_HALL_SWAMP")~"Calculated",
+                       T~paste0("PHAB_software_v",strsplit(packageVersion("PHAB") %>% as.character(),split=".")[[1]][1],".x")),
            FractionName="None",
            UnitName="none",
            VariableResult="",
@@ -58,7 +67,7 @@ swampify_IPI<-function(res, inp=NULL){
            BatchVerificationCode="NR",
            CollectionDeviceName="", 
            HabitatResultComments="",
-           
+           NULL
     ) %>%
     select(StationCode, PHAB_SampleID, SampleDate, 
            ProjectCode, EventCode, ProtocolCode, AgencyCode, SampleComments, 
