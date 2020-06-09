@@ -46,7 +46,7 @@ swampify_CSCI<-function(x){
            Replicate="",
            HabitatCollectionComments="",
            MatrixName="benthic",
-           MethodName=paste0("CSCI_software_v",packageVersion("CSCI")),
+           MethodName=paste0("CSCI_software_v",strsplit(packageVersion("CSCI") %>% as.character(),split=".")[[1]][1],".x"),
            FractionName="None",
            UnitName="none",
            VariableResult="",
