@@ -58,7 +58,7 @@ swampify_CSCI<-function(x){
            HabitatResultComments=""
            
     ) %>%
-    select(StationCode, SampleID, SampleDate, 
+    select(SampleID, StationCode, SampleDate, 
            ProjectCode, EventCode, ProtocolCode, AgencyCode, SampleComments, 
            LocationCode, GeometryShape, CollectionTime, CollectionMethodCode, 
            Replicate, HabitatCollectionComments, MatrixName, MethodName, AnalyteName,

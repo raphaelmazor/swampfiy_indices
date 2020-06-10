@@ -54,7 +54,7 @@ swampify_ASCI<-function(x){
            HabitatResultComments=Comments,
            
     ) %>%
-    select(StationCode, SampleID, SampleDate, 
+    select(SampleID, StationCode, SampleDate, 
            ProjectCode, EventCode, ProtocolCode, AgencyCode, SampleComments, 
            LocationCode, GeometryShape, CollectionTime, CollectionMethodCode, 
            Replicate, HabitatCollectionComments, MatrixName, MethodName, AnalyteName,

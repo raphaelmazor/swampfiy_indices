@@ -69,7 +69,7 @@ swampify_IPI<-function(res, inp=NULL){
            HabitatResultComments="",
            NULL
     ) %>%
-    select(StationCode, PHAB_SampleID, SampleDate, 
+    select(PHAB_SampleID, StationCode, SampleDate, 
            ProjectCode, EventCode, ProtocolCode, AgencyCode, SampleComments, 
            LocationCode, GeometryShape, CollectionTime, CollectionMethodCode, 
            Replicate, HabitatCollectionComments, MatrixName, MethodName, AnalyteName,
