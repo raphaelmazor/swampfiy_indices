@@ -94,7 +94,7 @@ results<-IPI(stations, phab)
 
 #If you only have the results
 results_swampified<-  swampify_IPI(results) 
-
+results_swampified %>% as.data.frame() %>% head()
 #If you also have the inputs
 results_swampified<-  swampify_IPI(res=results, inp=phab) 
 
