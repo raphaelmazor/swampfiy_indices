@@ -112,7 +112,7 @@ screen_ref<-
     PHABmets<-GIS %>%
       select(StationCode) %>%
       inner_join(phab %>%
-                   select(StationCode, SampleDate, Code, Result) %>%
+                   select(StationCode, SampleDate, Code, Result) %>% 
                    filter(Code=="W1_HALL_SWAMP")
       ) %>%
       group_by(StationCode) %>%
