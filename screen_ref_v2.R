@@ -46,28 +46,28 @@ screen_ref<-
                 AG_1k_01_pass = AG_1k_01 < 3,
                 UR_1k_01_pass = UR_1k_01 < 3,
                 AGUR_1k_01_pass = AGUR_1k_01 < 5,
-                CD21_1k_01_pass= CD21_1k_01  < 10,
+                CD21_1k_01_pass= CD21_1k_01  < 7,
                 AG_1k_06_pass = AG_1k_06 < 3,
                 UR_1k_06_pass = UR_1k_06 < 3,
                 AGUR_1k_06_pass = AGUR_1k_06 < 5,
-                CD21_1k_06_pass= CD21_1k_06  < 10,
+                CD21_1k_06_pass= CD21_1k_06  < 7,
                 AG_1k_16_pass = AG_1k_16 < 3,
                 UR_1k_16_pass = UR_1k_16 < 3,
                 AGUR_1k_16_pass = AGUR_1k_16 < 5,
-                CD21_1k_16_pass= CD21_1k_16  < 10,
+                CD21_1k_16_pass= CD21_1k_16  < 7,
                 
                 AG_5k_01_pass = AG_5k_01 < 3,
                 UR_5k_01_pass = UR_5k_01 < 3,
                 AGUR_5k_01_pass = AGUR_5k_01 < 5,
-                CD21_5k_01_pass= CD21_5k_01  < 10,
+                CD21_5k_01_pass= CD21_5k_01  < 7,
                 AG_5k_06_pass = AG_5k_06 < 3,
                 UR_5k_06_pass = UR_5k_06 < 3,
                 AGUR_5k_06_pass = AGUR_5k_06 < 5,
-                CD21_5k_06_pass= CD21_5k_06  < 10,
+                CD21_5k_06_pass= CD21_5k_06  < 7,
                 AG_5k_16_pass = AG_5k_16 < 3,
                 UR_5k_16_pass = UR_5k_16 < 3,
                 AGUR_5k_16_pass = AGUR_5k_16 < 5,
-                CD21_5k_16_pass= CD21_5k_16  < 10,
+                CD21_5k_16_pass= CD21_5k_16  < 7,
                 
                 PVD_INT_WS_pass = PVD_INT_WS < 50,
                 PVD_INT_5k_pass = PVD_INT_5k < 10,
@@ -93,6 +93,12 @@ screen_ref<-
                    "AG_5k_06_pass","UR_5k_06_pass", "UR_5k_06_pass", "CD21_5k_06_pass",
                    "AG_1k_06_pass","UR_1k_06_pass", "UR_1k_06_pass", "CD21_1k_06_pass")
       } else
+        if(nlcd_year==2011)
+        {
+          myvars2<-c(myvars, "AG_WS_11_pass","UR_WS_11_pass", "UR_WS_11_pass", "CD21_WS_11_pass",
+                     "AG_5k_11_pass","UR_5k_11_pass", "UR_5k_11_pass", "CD21_5k_11_pass",
+                     "AG_1k_11_pass","UR_1k_11_pass", "UR_1k_11_pass", "CD21_1k_11_pass")
+        } else
         if(nlcd_year==2016)
         {
           myvars2<-c(myvars, "AG_WS_16_pass","UR_WS_16_pass", "UR_WS_16_pass", "CD21_WS_16_pass",
@@ -136,8 +142,8 @@ refdf<-read.csv("RefScreening/refgis.csv", stringsAsFactors = F)
 phabdf<-read.csv("RefScreening/ReportingMetrics.csv", stringsAsFactors = F)
 
 
-screen_ref(GIS=refdf) %>%
-  select(StationCode,W1_HALL_SWAMP_pass, Ref_GIS_Field_Ode2016)
+screen_ref(GIS=refdf) 
 
-screen_ref(GIS=refdf, phab=phabdf)%>%
-  select(StationCode,Ref_GIS_Ode2016, W1_HALL_SWAMP_pass, Ref_GIS_Field_Ode2016)
+screen_ref(GIS=refdf, phab=phabdf)
+
+
