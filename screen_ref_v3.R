@@ -38,6 +38,23 @@ screen_ref<-
       }
     }
     
+    #What kind of PHAB metrics do you have?
+    
+    if(is.null(phab))
+    {
+      phab<-refGIS %>%
+        select(StationCode) %>%
+        unique() %>%
+        mutate(SampleDate="1/1/1950", 
+               Code="W1_HALL_SWAMP", 
+               Result=NA)
+    }
+    
+    if("Variable" %in% names(phab) ) {
+      phab<-phab %>%
+        rename(Code=Variable)
+    }
+    
     #Assemble observed cond
     if(is.null(cond))
       cond_obs<-refGIS %>%
@@ -105,15 +122,7 @@ screen_ref<-
                 SpCond_pass = (MaxCond<=CondQR99c & MinCond>=CondQR01))
 
     
-    if(is.null(phab))
-    {
-      phab<-refGIS %>%
-        select(StationCode) %>%
-        unique() %>%
-        mutate(SampleDate="1/1/1950", 
-               Code="W1_HALL_SWAMP", 
-               Result=NA)
-    }
+
     
     refGIS2<-refGIS %>%
       # refdf %>%
@@ -230,10 +239,11 @@ screen_ref<-
     refGIS5
   }
 
-refdf<-read.csv("RefScreening/refGIS.csv", stringsAsFactors = F)
+# refdf<-read.csv("RefScreening/refGIS.csv", stringsAsFactors = F)
 refdf<-read.csv("RefScreening/marco_test_061720/RefScreen_Metrics_Consolidated_Test.csv", stringsAsFactors = F)
-phabdf<-read.csv("RefScreening/ReportingMetrics.csv", stringsAsFactors = F)
+# phabdf<-read.csv("RefScreening/ReportingMetrics.csv", stringsAsFactors = F)
 phabdf<-read.csv("RefScreening/marco_test_061720/phab_metrics_Test.csv", stringsAsFactors = F)
+
 fielddf<-read.csv("RefScreening/phab_fieldresults.csv", stringsAsFactors = F)
 labdf<-read.csv("RefScreening/Report_LabResult.csv", stringsAsFactors = F)
 natdf<-read.csv("RefScreening/Indices_Metrics_Consolidated.csv", stringsAsFactors = F)
