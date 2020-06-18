@@ -205,8 +205,8 @@ screen_ref<-
     refGIS3 <-refGIS2 %>%
       pivot_longer(cols=all_of(myvars2), names_to="metric", values_to = "screen") %>%
       group_by(StationCode) %>%
-      summarise(Ref_refGIS_Ode2016 = all(screen),
-                Ref_refGISfailed_Ode2016 = sum(!screen)) %>%
+      summarise(Ref_GIS_Ode2016 = all(screen),
+                Ref_GISfailed_Ode2016 = sum(!screen)) %>%
       ungroup()
     refGIS4<-inner_join(refGIS2,refGIS3)
     PHABmets<-refGIS %>%
@@ -222,7 +222,7 @@ screen_ref<-
     
     refGIS5<-left_join(refGIS4, PHABmets) %>%
       left_join(cond_test) %>%
-      mutate(Ref_refGIS_Field_Ode2016= case_when((W1_HALL_SWAMP_pass & Ref_refGIS_Ode2016) ~ "Reference",
+      mutate(Ref_GIS_Field_Ode2016= case_when((W1_HALL_SWAMP_pass & Ref_GIS_Ode2016) ~ "Reference",
                                                  !Ref_GIS_Ode2016~"Non-reference",
                                                  Ref_GIS_Ode2016 & is.na(W1_HALL_SWAMP_pass) ~ "Tentative reference",
                                                  !W1_HALL_SWAMP_pass ~ "Non-reference",
@@ -231,7 +231,9 @@ screen_ref<-
   }
 
 refdf<-read.csv("RefScreening/refGIS.csv", stringsAsFactors = F)
+refdf<-read.csv("RefScreening/marco_test_061720/RefScreen_Metrics_Consolidated_Test.csv", stringsAsFactors = F)
 phabdf<-read.csv("RefScreening/ReportingMetrics.csv", stringsAsFactors = F)
+phabdf<-read.csv("RefScreening/marco_test_061720/phab_metrics_Test.csv", stringsAsFactors = F)
 fielddf<-read.csv("RefScreening/phab_fieldresults.csv", stringsAsFactors = F)
 labdf<-read.csv("RefScreening/Report_LabResult.csv", stringsAsFactors = F)
 natdf<-read.csv("RefScreening/Indices_Metrics_Consolidated.csv", stringsAsFactors = F)
